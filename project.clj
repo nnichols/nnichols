@@ -1,6 +1,6 @@
 (defproject nnichols "0.0.1"
             :description "A bunch of functions and definitions I'm sick of copy/pasting"
-            :url "http://example.com/FIXME"
+            :url "https://github.com/nnichols/nnichols"
             :license {:name "MIT"
                       :url "https://opensource.org/licenses/MIT"}
             :dependencies [[org.clojure/clojure "1.10.0"]
