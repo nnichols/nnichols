@@ -1,4 +1,4 @@
-(defproject nnichols "0.1.0"
+(defproject nnichols "0..0"
             :description "A bunch of functions and definitions I'm sick of copy/pasting"
             :url "https://github.com/nnichols/nnichols"
             :license {:name "MIT"

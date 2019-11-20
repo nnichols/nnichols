@@ -1,3 +1,7 @@
+## v0.2.0 / 2019 November 20
+
+> This release adds `->yes-no` and `dissoc-in`
+
 ## v0.1.0 / 2019 November 16
 
 > This release adds the palette namespace

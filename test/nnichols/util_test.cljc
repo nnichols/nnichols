@@ -98,5 +98,5 @@
     (is (= "Yes" (nu/->yes-no {:some "value"})))
     (is (= "Yes" (nu/->yes-no (:some {:some "value"}))))
     (is (= "No"  (nu/->yes-no false)))
-    (is (= "No" (nu/->yes-no (:none {:some "value"}))))
+    (is (= "No"  (nu/->yes-no (:none {:some "value"}))))
     (is (= "No"  (nu/->yes-no nil)))))
