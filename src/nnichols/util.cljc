@@ -52,11 +52,29 @@
     (update m k update-fn)
     (assoc m k v)))
 
+(defn dissoc-in
+  "Dissoc the value in `m` at `ks`"
+  [m [k & ks]]
+  (if ks
+    (if (contains? m k)
+      (update m k dissoc-in ks)
+      m)
+    (dissoc m k)))
+
 ;;
 ;; UUID
 ;;
 (defn uuid
   "Split operator to generate v1 uuids based on runtime env"
   []
-  #? (:clj  (str (java.util.UUID/randomUUID))
-            :cljs (str (random-uuid))))
+  #? (:clj  (java.util.UUID/randomUUID)
+      :cljs (random-uuid)))
+
+;;
+;; CONVENIENCE
+;;
+(defn ->yes-no
+  "If a value is truthy, returns the string Yes.
+   Else, return the string No"
+  [value]
+  (if value "Yes" "No"))

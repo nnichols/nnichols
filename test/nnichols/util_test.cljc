@@ -67,10 +67,36 @@
     (is (= {} (nu/rand-kv #{})))
     (is (= {} (nu/rand-kv nil)))))
 
-(deftest update-or-assoc-text
+(deftest update-or-assoc-test
   (testing "Functional correctness"
     (is (= {:a 1} (nu/update-or-assoc {} :a 1 inc)))
     (is (= {:a 2} (nu/update-or-assoc {:a 1} :a 1 inc))))
 
   (testing "Throws an exception when a non-associative colelction is passed"
     (is (nil? (nu/try-or-nil nu/update-or-assoc [] :a nil dec)))))
+
+(deftest dissoc-in-test
+  (testing "Functional correctness"
+    (is (= nil (nu/dissoc-in nil [:b])))
+    (is (= {} (nu/dissoc-in {} [])))
+    (is (= {} (nu/dissoc-in {} [:b])))
+    (is (= {} (nu/dissoc-in {} [:a :b])))
+    (is (= {:a nil} (nu/dissoc-in {:a nil} [:a :b])))
+    (is (= {:a nil :b false} (nu/dissoc-in {:a nil :b false} [:a :b])))
+    (is (= {:a nil :b false} (nu/dissoc-in {:a nil :b false} [])))
+    (is (= {:a 1} (nu/dissoc-in {:a 1 :b 2} [:b])))
+    (is (= {:a {:c 3}} (nu/dissoc-in {:a {:b 2 :c 3}} [:a :b])))
+    (is (= {:a {:c {:d 4} :e 5} :d 4} (nu/dissoc-in {:a {:c {:d 4} :e 5} :d 4} [:a :c :f])))
+    (is (= {:a {:c {:d 4} :e 5} :d 4} (nu/dissoc-in {:a {:c {:d 4 :f [1 2 3]} :e 5} :d 4} [:a :c :f]))))
+
+  (testing "Throws an exception when a non-associative colelction is passed"
+    (is (nil? (nu/try-or-nil nu/dissoc-in [:a :b :c] [:a])))))
+
+(deftest ->yes-no-test
+  (testing "Functional correctness"
+    (is (= "Yes" (nu/->yes-no true)))
+    (is (= "Yes" (nu/->yes-no {:some "value"})))
+    (is (= "Yes" (nu/->yes-no (:some {:some "value"}))))
+    (is (= "No"  (nu/->yes-no false)))
+    (is (= "No" (nu/->yes-no (:none {:some "value"}))))
+    (is (= "No"  (nu/->yes-no nil)))))
