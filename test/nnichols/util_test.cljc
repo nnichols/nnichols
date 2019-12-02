@@ -67,6 +67,42 @@
     (is (= {} (nu/rand-kv #{})))
     (is (= {} (nu/rand-kv nil)))))
 
+(deftest filter-by-values-test
+  (testing "Only k-v pairs whose values when applied to f are truthy remains"
+    (is (= {} (nu/filter-by-values some? {})))
+    (is (= {} (nu/filter-by-values nil? {})))
+    (is (= {:a 2 :c 4 :d 6} (nu/filter-by-values even? {:a 2 :b 1 :c 4 :d 6 :e 7})))
+    (is (= {:a nil} (nu/filter-by-values nil? {:a nil :b {:c nil}})))
+    (is (= {"a" 1 "b" 3 "c" 5} (nu/filter-by-values odd? {"a" 1 "b" 3 "c" 5})))
+    (is (= {} (nu/filter-by-values map? {:a [] :b 5 :c "hello"})))))
+
+(deftest remove-by-values-test
+  (testing "Only k-v pairs whose values when applied to f are falsey remains"
+    (is (= {} (nu/remove-by-values some? {})))
+    (is (= {} (nu/remove-by-values nil? {})))
+    (is (= {:b 1 :e 7} (nu/remove-by-values even? {:a 2 :b 1 :c 4 :d 6 :e 7})))
+    (is (= {:b {:c nil}} (nu/remove-by-values nil? {:a nil :b {:c nil}})))
+    (is (= {} (nu/remove-by-values odd? {"a" 1 "b" 3 "c" 5})))
+    (is (= {:a [] :b 5 :c "hello"} (nu/remove-by-values map? {:a [] :b 5 :c "hello"})))))
+
+(deftest filter-by-keys-test
+  (testing "Only k-v pairs whose keys when applied to f are truthy remains"
+    (is (= {} (nu/filter-by-keys some? {})))
+    (is (= {} (nu/filter-by-keys nil? {})))
+    (is (= {2 :a 4 :c 6 :d} (nu/filter-by-keys even? {2 :a 1 :b 4 :c 6 :d 7 :e})))
+    (is (= {nil :a} (nu/filter-by-keys nil? {nil :a :b {:c nil}})))
+    (is (= {"a" 1 "b" 3 "c" 5} (nu/filter-by-keys string? {"a" 1 "b" 3 "c" 5})))
+    (is (= {} (nu/filter-by-keys string? {:a [] :b 5 :c "hello"})))))
+
+(deftest remove-by-keys-test
+  (testing "Only k-v pairs whose keys when applied to f are falsey remains"
+    (is (= {} (nu/remove-by-keys some? {})))
+    (is (= {} (nu/remove-by-keys nil? {})))
+    (is (= {1 :b 7 :e} (nu/remove-by-keys even? {2 :a 1 :b 4 :c 6 :d 7 :e})))
+    (is (= {:b {:c nil}} (nu/remove-by-keys nil? {nil :a :b {:c nil}})))
+    (is (= {} (nu/remove-by-keys string? {"a" 1 "b" 3 "c" 5})))
+    (is (= {:a [] :b 5 :c "hello"} (nu/remove-by-keys string? {:a [] :b 5 :c "hello"})))))
+
 (deftest update-or-assoc-test
   (testing "Functional correctness"
     (is (= {:a 1} (nu/update-or-assoc {} :a 1 inc)))
