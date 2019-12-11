@@ -1,4 +1,8 @@
-## v0.2.0 / 2019 November 20
+## v0.3.0 / 2019 December 11
+
+> This release adds functions useful for manipulating data to and from SQL
+
+## v0.2.1 / 2019 November 20
 
 > This release fixes project #
 
