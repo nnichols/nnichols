@@ -4,8 +4,6 @@
             :license {:name "MIT"
                       :url "https://opensource.org/licenses/MIT"}
             :dependencies [[camel-snake-kebab "0.4.1"]
-                           [clj-time "0.15.2"]
-                           [com.andrewmcveigh/cljs-time "0.5.2"]
                            [org.clojure/clojure "1.10.1"]
                            [org.clojure/clojurescript "1.10.597" :scope "provided"]]
 

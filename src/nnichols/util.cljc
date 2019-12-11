@@ -1,5 +1,7 @@
 (ns nnichols.util
   "A bunch of utility functions"
+  (:require [camel-snake-kebab.core :as csk]
+            [camel-snake-kebab.extras :as cskx])
   (:refer-clojure :exclude [uuid]))
 
 ;;
@@ -68,6 +70,11 @@
   (let [reducing-fn (fn [m-prime k v] (if (f k) m-prime (assoc m-prime k v)))]
     (reduce-kv reducing-fn {} m)))
 
+(defn update-vals
+  "Return `m` with `f` applied to each val in `m` with its `args`"
+  [m f & args]
+  (reduce-kv (fn [m' k v] (assoc m' k (apply f v args))) {} m))
+
 (defn update-or-assoc
   "If `k` exists in `m` apply the `update-fn`.
    Else, assoc `v` to that `k` in `m`"
@@ -84,6 +91,14 @@
       (update m k dissoc-in ks)
       m)
     (dissoc m k)))
+
+(def ->kebab-keys
+  "Takes a map and returns the map with kebab-cased keys."
+  (partial cskx/transform-keys csk/->kebab-case-keyword))
+
+(def ->snake-keys
+  "Takes a map and returns the map with snake_cased keys."
+  (partial cskx/transform-keys csk/->snake_case_keyword))
 
 ;;
 ;; UUID

@@ -30,9 +30,9 @@
 (deftest rand-key-test
   (testing "Retreived keys belong to source map"
     (is (= :a (nu/rand-key {:a {:b 1}})))
-    (is (#{:a :B :c } (nu/rand-key {:a 1 :B nil :c "foo"})))
+    (is (#{:a :B :c} (nu/rand-key {:a 1 :B nil :c "foo"})))
     (is (#{"a" "B" "c"} (nu/rand-key {"a" :a "B" nil "c" 3.14})))
-    (is (#{:a "B" :c } (nu/rand-key {:a 1 "B" nil :c "foo"}))))
+    (is (#{:a "B" :c} (nu/rand-key {:a 1 "B" nil :c "foo"}))))
 
   (testing "Functional safety"
     (is (nil? (nu/rand-key {})))
@@ -103,6 +103,12 @@
     (is (= {} (nu/remove-by-keys string? {"a" 1 "b" 3 "c" 5})))
     (is (= {:a [] :b 5 :c "hello"} (nu/remove-by-keys string? {:a [] :b 5 :c "hello"})))))
 
+(deftest update-vals-test
+  (testing "Functional correctness"
+    (is (= {:a 2 :b 3} (nu/update-vals {:a 1 :b 2} inc)))
+    (is (= {} (nu/update-vals {} dec)))
+    (is (= {:b 3 :c 4} (nu/update-vals {:b 1 :c 2} + 2)))))
+
 (deftest update-or-assoc-test
   (testing "Functional correctness"
     (is (= {:a 1} (nu/update-or-assoc {} :a 1 inc)))
@@ -127,6 +133,22 @@
 
   (testing "Throws an exception when a non-associative colelction is passed"
     (is (nil? (nu/try-or-nil nu/dissoc-in [:a :b :c] [:a])))))
+
+(deftest ->kebab-keys-test
+  (testing "Functional correctness"
+    (is (= nil (nu/->kebab-keys nil)))
+    (is (= {:foo :bar} (nu/->kebab-keys {:foo :bar})))
+    (is (= {:foo-bar 1} (nu/->kebab-keys {:foo-bar 1})))
+    (is (= {:foo-bar 1} (nu/->kebab-keys {:fooBar 1})))
+    (is (= {:foo-bar 1} (nu/->kebab-keys {:foo_bar 1})))))
+
+(deftest ->snake-keys-test
+  (testing "Functional correctness"
+    (is (= nil (nu/->snake-keys nil)))
+    (is (= {:foo :bar} (nu/->snake-keys {:foo :bar})))
+    (is (= {:foo_bar 1} (nu/->snake-keys {:foo_bar 1})))
+    (is (= {:foo_bar 1} (nu/->snake-keys {:fooBar 1})))
+    (is (= {:foo_bar 1} (nu/->snake-keys {:foo-bar 1})))))
 
 (deftest ->yes-no-test
   (testing "Functional correctness"
