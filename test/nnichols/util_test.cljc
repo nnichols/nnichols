@@ -129,7 +129,9 @@
     (is (= {:a 1} (nu/dissoc-in {:a 1 :b 2} [:b])))
     (is (= {:a {:c 3}} (nu/dissoc-in {:a {:b 2 :c 3}} [:a :b])))
     (is (= {:a {:c {:d 4} :e 5} :d 4} (nu/dissoc-in {:a {:c {:d 4} :e 5} :d 4} [:a :c :f])))
-    (is (= {:a {:c {:d 4} :e 5} :d 4} (nu/dissoc-in {:a {:c {:d 4 :f [1 2 3]} :e 5} :d 4} [:a :c :f]))))
+    (is (= {:a {:c {:d 4} :e 5} :d 4} (nu/dissoc-in {:a {:c {:d 4 :f [1 2 3]} :e 5} :d 4} [:a :c :f])))
+    (is (= {:a {:b {:d 2}}} (nu/dissoc-in {:a {:b {:c 1 :d 2}}} [:a :b :c])))
+    (is (= {:a {:b {}}} (nu/dissoc-in {:a {:b {:c 1}}} [:a :b :c]))))
 
   (testing "Throws an exception when a non-associative colelction is passed"
     (is (nil? (nu/try-or-nil nu/dissoc-in [:a :b :c] [:a])))))

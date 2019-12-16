@@ -107,7 +107,11 @@
   "Split operator to generate v1 uuids based on runtime env"
   []
   #? (:clj  (java.util.UUID/randomUUID)
-      :cljs (random-uuid)))
+            :cljs (random-uuid)))
+
+(def guid
+  "Split operator to generate v1 guids based on runtime env"
+  uuid)
 
 ;;
 ;; CONVENIENCE
