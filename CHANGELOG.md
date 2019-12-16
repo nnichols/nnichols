@@ -1,3 +1,9 @@
+## v0.4.0 / 2019 Dec 16
+
+> This release adds radix parsers,and uuid predicates
+
+* **Add** ^^^
+
 ## v0.3.0 / 2019 December 11
 
 > This release adds functions useful for manipulating data to and from SQL
