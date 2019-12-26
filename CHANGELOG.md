@@ -1,6 +1,6 @@
 ## v0.4.0 / 2019 Dec 16
 
-> This release adds radix parsers,and uuid predicates
+> This release adds radix parsers and uuid predicates
 
 * **Add** ^^^
 
