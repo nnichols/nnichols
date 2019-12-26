@@ -13,7 +13,10 @@
   (cond
     (int? int-str) int-str
     (string? int-str) #? (:clj  (Integer/parseInt int-str radix)
-                          :cljs (js/parseInt int-str radix))
+                          :cljs (let [result (js/parseInt int-str radix)]
+                                  (if (js/isNaN result)
+                                    (throw (js/Error. "Argument is not a number"))
+                                    result)))
     :else (throw (ex-info "Can't parse input" {:parse-target int-str :radix radix}))))
 
 (defn parse-binary

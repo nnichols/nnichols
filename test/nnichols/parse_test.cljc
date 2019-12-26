@@ -45,8 +45,10 @@
       (= i (np/parse-int-or-zero (str i)))))
     (is (let [i (rand-int 1000000000)]
       (= i (np/parse-int-or-zero i))))
-    (is (nil? (np/try-parse-int 0.0)))
-    (is (nil? (np/try-parse-int "6.908")))
+    #?(:cljs (is (zero? (np/try-parse-int 0.0))))
+    #?(:clj  (is (nil? (np/try-parse-int 0.0))))
+    #?(:cljs (is (= 6 (np/try-parse-int "6.902"))))
+    #?(:clj  (is (nil? (np/try-parse-int "6.902"))))
     (is (nil? (np/try-parse-int true)))
     (is (nil? (np/try-parse-int nil)))
     (is (zero? (np/parse-int-or-zero "ABC")))
