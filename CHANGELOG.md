@@ -1,3 +1,9 @@
+## v0.5.0 / 2019 Dec 26
+
+> This release adds number-centric parsers
+
+* **Add** ^^^
+
 ## v0.4.0 / 2019 Dec 16
 
 > This release adds radix parsers and uuid predicates
