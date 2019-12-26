@@ -88,7 +88,7 @@
    40	 srm-40})
 
 (defn srm-number-to-rgba
-  "Given an SRM number, return the closest applicable RGBA color string.
+  "Given `srm-number`, return the closest applicable RGBA color string.
    OPINIONATED: The provided `srm-number` will be bound to the common range from 1 to 40
                 Decimal-like values are trimmed, not rounded."
   [srm-number]

@@ -2,7 +2,9 @@
   (:require [nnichols.predicate :as np]
             [nnichols.util :as nu]
             #? (:clj  [clojure.test :refer [deftest is testing run-tests]])
-            #? (:cljs [cljs.test    :refer-macros [deftest is testing run-tests]])))
+            #? (:cljs [cljs.test    :refer-macros [deftest is testing run-tests]])
+            #? (:clj  [clj-time.core :as time])
+            #? (:cljs [cljs-time.core :as time])))
 
 (deftest boolean?-test
   (testing "Only boolean values evalutae true"
@@ -21,3 +23,11 @@
     (is (true? (np/uuid? (nu/guid))))
     (is (false? (np/uuid? nil)))
     (is (false? (np/uuid? "705d0e70-08db-450e-9982-c897d483136a")))))
+
+(deftest date-test
+  (testing "Functional correctness"
+    (is (true? (np/date? (time/now))))
+    (is (false? (np/date? "December 26, 2019 12:34 AM")))
+    (is (false? (np/date? nil)))
+    (is (false? (np/date? 1577394213)))
+    (is (false? (np/date? "1577394213")))))

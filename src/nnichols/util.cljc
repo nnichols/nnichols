@@ -117,7 +117,7 @@
 ;; CONVENIENCE
 ;;
 (defn ->yes-no
-  "If a value is truthy, returns the string Yes.
-   Else, return the string No"
+  "If a value is truthy, returns the string \"Yes\".
+   Else, return the string \"No\""
   [value]
   (if value "Yes" "No"))
