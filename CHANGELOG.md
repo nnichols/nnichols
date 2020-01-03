@@ -1,3 +1,9 @@
+## v0.6.0 / 2020 Jan 03
+
+> This release adds `pluralize`
+
+* **Add** ^^^
+
 ## v0.5.0 / 2019 Dec 26
 
 > This release adds number-centric parsers
