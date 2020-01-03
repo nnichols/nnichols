@@ -160,3 +160,11 @@
     (is (= "No"  (nu/->yes-no false)))
     (is (= "No"  (nu/->yes-no (:none {:some "value"}))))
     (is (= "No"  (nu/->yes-no nil)))))
+
+(deftest pluralize-test
+  (testing "Functional correctness"
+    (is (= "snake" (nu/pluralize "snake" 1)))
+    (is (= "snake" (nu/pluralize "snake" 0)))
+    (is (= "snakes" (nu/pluralize "snake" 2)))
+    (is (= "peach" (nu/pluralize "peach" 1 "peaches")))
+    (is (= "peaches" (nu/pluralize "peach" 10 "peaches")))))
