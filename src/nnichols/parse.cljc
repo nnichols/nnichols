@@ -2,6 +2,7 @@
   "A bunch of utility functions for parsing strings to the types they represent"
     (:require [clojure.string :as cs]
               #?(:cljs [goog.string])
+              [nnichols.predicate :as np]
               [nnichols.util :as nu])
   #?(:clj (:import (java.util UUID)
                    (java.lang Double))))
@@ -61,8 +62,8 @@
   "Like `parse-uuid`, but returns `u` if it's already a UUID, or nil for invalid inputs."
   [u]
   (cond
-    (nil? u)    nil
-    (uuid? u)   u
+    (nil? u) nil
+    (np/uuid? u) u
     (string? u) (nu/try-or-nil parse-uuid u)))
 
 (defn try-parse-guid
