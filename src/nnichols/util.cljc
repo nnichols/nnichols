@@ -121,3 +121,13 @@
    Else, return the string \"No\""
   [value]
   (if value "Yes" "No"))
+
+(defn pluralize
+  "Naively pluralize `given-string` based on `amount`
+   Optionally, an `override-string` can be passed for special cases:
+   e.g \"peach\" -> \"peaches\""
+  ([given-string amount]
+   (pluralize given-string amount (str given-string "s")))
+
+  ([given-string amount override-string]
+   (if (< 1 amount) override-string given-string)))
