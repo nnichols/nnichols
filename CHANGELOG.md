@@ -1,3 +1,9 @@
+## v0.7.0 / 2020 Jan 17
+
+> This release adds common spec definitions, boolean parsing
+
+* **Add** ^ ^ ^
+
 ## v0.6.0 / 2020 Jan 03
 
 > This release adds `pluralize`

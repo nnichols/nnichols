@@ -1,6 +1,6 @@
 {
   "name": "nnichols",
-  "version": "0.5.0",
+  "version": "0.7.0",
   "description": "A bunch of functions and definitions I'm sick of copy/pasting",
   "main": "index.js",
   "directories": {
