@@ -166,10 +166,42 @@
           (cond
             (nil? double-string) nil
             (double? double-string) double-string
-            (string? double-string) (nu/try-or-nil parse-double double-string))))
+            :else (nu/try-or-nil parse-double double-string))))
 
 #?(:clj (defn parse-double-or-zero
           "Like `try-parse-double`, but returns 0.0 instead of nil.
            Useful when passing return values into numeric operations."
           [double-string]
           (or (try-parse-double double-string) (double 0))))
+
+(defn parse-boolean-string
+  "Convert `bool-str` to a boolean for the strings true/false (Any casing)"
+  [bool-str]
+  (let [comp-str (cs/lower-case bool-str)]
+    (condp = comp-str
+      "true"  true
+      "false" false
+      (throw (ex-info "Can't parse input" {:parse-target bool-str})))))
+
+(def try-parse-boolean-string
+  "Like `parse-binary`, but returns nil for invalid input."
+  (partial nu/try-or-nil parse-boolean-string))
+
+(defn parse-boolean
+  "Like `parse-boolean-string`, but returns boolean values passed through and uses clojure's definition of truthiness for all other values"
+  [bool-str]
+  (let [parsed-val (try-parse-boolean-string bool-str)]
+    (if (some? parsed-val)
+      parsed-val
+      (if (np/boolean? bool-str)
+        bool-str
+        (boolean bool-str)))))
+
+(defn parse-boolean-strict
+  "Like `parse-boolean`, but throws an exception for values that are neither booleans nor true/false strings.
+   Useful for spec/conformance."
+  [bool-str]
+  (cond
+    (np/boolean? bool-str) bool-str
+    (string? bool-str) (parse-boolean-string bool-str)
+    :else (throw (ex-info "Can't parse input" {:parse-target bool-str}))))
