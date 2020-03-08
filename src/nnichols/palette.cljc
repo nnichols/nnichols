@@ -107,5 +107,8 @@
 ;;
 ;; Wall Brew Co Colors
 ;;
-(def ^:const slate   "rgba(45,52,58,1)")
-(def ^:const emerald "rgba(43,136,74,1)")
+(def ^:const slate     "rgba(45,52,58,1)")
+(def ^:const emerald   "rgba(43,136,74,1)")
+(def ^:const barley    "rgba(132,108,91,1)")
+(def ^:const pale-ale  "rgba(227,210,87,1)")
+(def ^:const steel     "rgba(140,156,148,1)")
