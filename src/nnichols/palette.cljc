@@ -103,3 +103,12 @@
 (def ^:const cappuccino "rgba(249,66,58,1)")
 (def ^:const mocha      "rgba(99,72,50,1)")
 (def ^:const espresso   "rgba(56,34,15,1)")
+
+;;
+;; Wall Brew Co Colors
+;;
+(def ^:const slate     "rgba(45,52,58,1)")
+(def ^:const emerald   "rgba(43,136,74,1)")
+(def ^:const barley    "rgba(132,108,91,1)")
+(def ^:const pale-ale  "rgba(227,210,87,1)")
+(def ^:const steel     "rgba(140,156,148,1)")
