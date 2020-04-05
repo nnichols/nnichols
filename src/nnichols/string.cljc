@@ -1,5 +1,5 @@
 (ns nnichols.string
-  "A bunch of utility functions"
+  "A bunch of utility functions for strings"
   (:require [clojure.string :as cs]))
 
 (defn prepare-for-compare
