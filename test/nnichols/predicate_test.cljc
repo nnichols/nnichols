@@ -1,7 +1,7 @@
 (ns nnichols.predicate-test
   (:require [nnichols.predicate :as np]
             [nnichols.util :as nu]
-            #? (:clj  [clojure.test :refer [deftest is testing run-tests]])
+            #? (:clj  [clojure.test :refer [deftest is testing]])
             #? (:cljs [cljs.test    :refer-macros [deftest is testing run-tests]])
             #? (:clj  [clj-time.core :as time])
             #? (:cljs [cljs-time.core :as time])))

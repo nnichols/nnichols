@@ -1,6 +1,6 @@
 (ns nnichols.palette-test
   (:require [nnichols.palette :as palette]
-            #? (:clj  [clojure.test :refer [deftest is testing run-tests]])
+            #? (:clj  [clojure.test :refer [deftest is testing]])
             #? (:cljs [cljs.test    :refer-macros [deftest is testing run-tests]])))
 
 (deftest srm-number-to-rgba-test

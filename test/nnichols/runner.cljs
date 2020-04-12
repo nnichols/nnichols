@@ -5,11 +5,15 @@
             [nnichols.parse-test]
             [nnichols.predicate-test]
             [nnichols.spec-test]
-            [nnichols.util-test]))
+            [nnichols.string-test]
+            [nnichols.util-test]
+            [nnichols.xml-test]))
 
 (doo-tests 'nnichols.http-test
            'nnichols.palette-test
            'nnichols.parse-test
            'nnichols.predicate-test
            'nnichols.spec-test
-           'nnichols.util-test)
+           'nnichols.string-test
+           'nnichols.util-test
+           'nnichols.xml-test)

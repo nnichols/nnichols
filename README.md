@@ -1,4 +1,5 @@
 # nnichols
+
 [![Clojars Project](https://img.shields.io/clojars/v/nnichols.svg)](https://clojars.org/nnichols)
 [![Dependencies Status](https://versions.deps.co/nnichols/nnichols/status.svg)](https://versions.deps.co/nnichols/nnichols)
 [![cljdoc badge](https://cljdoc.org/badge/nnichols/nnichols)](https://cljdoc.org/d/nnichols/nnichols/CURRENT)
@@ -22,6 +23,6 @@ Once the project has been added, you can require in any namespace and use them f
 
 ## License
 
-Copyright © 2019
+Copyright © 2020
 
-MIT License provided in full text within LICENSE file
+MIT License provided in full text within LICENSE file.
