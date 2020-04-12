@@ -75,6 +75,11 @@
   [m f & args]
   (reduce-kv (fn [m' k v] (assoc m' k (apply f v args))) {} m))
 
+(defn update-keys
+  "Return `m` with `f` applied to each key in `m` with its `args`"
+  [m f & args]
+  (reduce-kv (fn [m' k v] (assoc m' (apply f k args) v)) {} m))
+
 (defn update-or-assoc
   "If `k` exists in `m` apply the `update-fn`.
    Else, assoc `v` to that `k` in `m`"
