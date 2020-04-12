@@ -1,3 +1,9 @@
+## v0.8.0 / 2020 Apr 12
+
+> This release adds XML conversion to work with `clojure.xml/parse`
+
+* **Add** ^ ^ ^
+
 ## v0.7.0 / 2020 Jan 17
 
 > This release adds common spec definitions, boolean parsing
