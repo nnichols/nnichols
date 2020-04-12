@@ -94,4 +94,5 @@
     (is (= (nx/xml->edn xml-example {:preserve-keys? true :preserve-attrs? true}) edn-example-with-attrs-and-original-keys))
     (is (nil? (nx/xml->edn nil)))
     (is (nil? (nx/xml->edn :edn)))
+    (is (= (nx/xml->edn {}) {}))
     (is (= (nx/xml->edn "XML") "XML"))))
