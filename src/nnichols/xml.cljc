@@ -35,11 +35,11 @@
 
   ([xml-seq opts]
    (let [xml-transformer (fn [x] (xml->edn x opts))]
-     (if (> (count xml-seq) 1)
-       (if (unique-tags? xml-seq)
+       (if (and (unique-tags? xml-seq) (> (count xml-seq) 1))
          (reduce into {} (mapv xml-transformer xml-seq))
-         (mapv xml-transformer xml-seq))
-       (xml-transformer (first xml-seq))))))
+         (if (or (string? (first xml-seq)) (nil? (first xml-seq)))
+           (xml-transformer (first xml-seq))
+           (mapv xml-transformer xml-seq))))))
 
 (defn xml-map->edn
   "Transform an XML map as formatted by `clojure.xml/parse`, and transform it into normalized EDN.

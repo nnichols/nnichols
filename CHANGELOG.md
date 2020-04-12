@@ -1,3 +1,9 @@
+## v0.8.1 / 2020 Apr 12
+
+> This release fixes a bug in XML conversion for nested singleton collections
+
+* **Fix** ^
+
 ## v0.8.0 / 2020 Apr 12
 
 > This release adds XML conversion to work with `clojure.xml/parse`

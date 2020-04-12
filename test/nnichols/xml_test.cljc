@@ -50,7 +50,7 @@
   {:test-document
    {:head [{:meta-data "Some Fake Data!"}
            {:meta-data "Example Content"}]
-    :file {:groups {:group "test-data-club"}
+    :file {:groups [{:group "test-data-club"}]
            :segments [{:segment "more data"}
                       {:segment "more fake data"}]}}})
 
@@ -58,7 +58,7 @@
   {:TEST_DOCUMENT
    {:HEAD [{:META_DATA "Some Fake Data!"}
            {:META_DATA "Example Content"}]
-    :FILE {:GROUPS {:GROUP "test-data-club"}
+    :FILE {:GROUPS [{:GROUP "test-data-club"}]
            :SEGMENTS [{:SEGMENT "more data"}
                       {:SEGMENT "more fake data"}]}}})
 
@@ -66,7 +66,7 @@
   {:test-document
    {:head [{:meta-data "Some Fake Data!" :meta-data-attrs {:type "title"}}
            {:meta-data "Example Content" :meta-data-attrs {:type "tag"}}]
-    :file {:groups {:group "test-data-club"}
+    :file {:groups [{:group "test-data-club"}]
            :segments [{:segment "more data" :segment-attrs {:bits "00111010" :number "58"}}
                       {:segment "more fake data" :segment-attrs {:bytes "10100010" :number "-94"}}]}
     :file-attrs {:poster "JANE DOE <j.doe@fake-email.not-real>"
@@ -78,7 +78,7 @@
   {:TEST_DOCUMENT
    {:HEAD [{:META_DATA "Some Fake Data!" :META_DATA_ATTRS {:TYPE "title"}}
            {:META_DATA "Example Content" :META_DATA_ATTRS {:TYPE "tag"}}]
-    :FILE {:GROUPS {:GROUP "test-data-club"}
+    :FILE {:GROUPS [{:GROUP "test-data-club"}]
            :SEGMENTS [{:SEGMENT "more data" :SEGMENT_ATTRS {:BITS "00111010" :NUMBER "58"}}
                       {:SEGMENT "more fake data" :SEGMENT_ATTRS {:bytes "10100010" :number "-94"}}]}
     :FILE_ATTRS {:POSTER "JANE DOE <j.doe@fake-email.not-real>"
