@@ -4,7 +4,7 @@
             [nnichols.predicate :as np]
             [nnichols.spec :as s]
             [nnichols.util :as nu]
-            #? (:clj  [clojure.test :refer [deftest is testing run-tests]])
+            #? (:clj  [clojure.test :refer [deftest is testing]])
             #? (:cljs [cljs.test    :refer-macros [deftest is testing run-tests]])))
 
 (deftest boolean-spec-test

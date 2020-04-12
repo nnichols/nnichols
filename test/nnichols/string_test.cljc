@@ -1,6 +1,6 @@
 (ns nnichols.string-test
   (:require [nnichols.string :as nstr]
-            #? (:clj  [clojure.test :refer [deftest is testing run-tests]])
+            #? (:clj  [clojure.test :refer [deftest is testing]])
             #? (:cljs [cljs.test    :refer-macros [deftest is testing run-tests]])))
 
 (deftest prepare-for-compare-test

@@ -2,7 +2,7 @@
   (:require [nnichols.parse :as np]
             [nnichols.util :as nu]
             [nnichols.predicate :as npr]
-            #? (:clj  [clojure.test :refer [deftest is testing run-tests]])
+            #? (:clj  [clojure.test :refer [deftest is testing]])
             #? (:cljs [cljs.test    :refer-macros [deftest is testing run-tests]])))
 
 (deftest parse-radix-test
