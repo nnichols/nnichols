@@ -25,27 +25,38 @@
 
 (defn xml->edn
   "Transform an XML document as formatted by `clojure.xml/parse`, and transform it into normalized EDN.
-   This also mutates keys from XML_CASE to lisp-case."
-  [element]
-  (let [xml-seq->edn (fn [e]
-                       (if (> (count e) 1)
-                         (if (unique-tags? e)
-                           (reduce into {} (map (partial xml->edn) e))
-                           (map xml->edn e))
-                         (xml->edn (first e))))
-        xml-map->edn (fn [e]
-                       (let [edn-tag (xml-tag->keyword (:tag e))]
-                         (if (:attrs e)
-                           (let [attrs-key (keyword (str (name edn-tag) "-attrs"))
-                                 attrs-val (nu/update-keys (:attrs e) xml-tag->keyword)]
-                             {edn-tag (xml->edn (:content e))
-                              attrs-key attrs-val})
-                           {edn-tag (xml->edn (:content e))})))]
-    (cond
-      (nil? element)         nil
-      (string? element)      element
-      (sequential? element)  (xml-seq->edn element)
-      (and (map? element)
-           (empty? element)) {}
-      (map? element)         (xml-map->edn element)
-      :else                  nil)))
+   By default, this also mutates keys from XML_CASE to lisp-case and ignores XML attributes within tags.
+   To change this behavior, an option map be provided with the following keys:
+   preserve-keys? - to maintain the exact keyword structure provided by `clojure.xml/parse`
+   preserve-attrs? - to maintain embedded XML attributes"
+  ([xml-doc]
+   (xml->edn xml-doc {}))
+
+  ([xml-doc {:keys [preserve-keys? preserve-attrs?]}]
+   (let [kw-function (fn [k]
+                       (if preserve-keys?
+                         k
+                         (xml-tag->keyword k)))
+         xml-seq->edn (fn [e]
+                        (if (> (count e) 1)
+                          (if (unique-tags? e)
+                            (reduce into {} (map xml->edn e))
+                            (map xml->edn e))
+                          (xml->edn (first e))))
+         xml-map->edn (fn [{:keys [tag attrs content]}]
+                        (let [edn-tag (kw-function tag)]
+                          (if (and attrs preserve-attrs?)
+                            (let [attrs-suffix (if preserve-keys? "_ATTRS" "-attrs")
+                                  attrs-key    (keyword (str (name edn-tag) attrs-suffix))
+                                  attrs-val    (nu/update-keys attrs kw-function)]
+                              {edn-tag   (xml->edn content)
+                               attrs-key attrs-val})
+                            {edn-tag (xml->edn content)})))]
+     (cond
+       (nil? xml-doc)         nil
+       (string? xml-doc)      xml-doc
+       (sequential? xml-doc)  (xml-seq->edn xml-doc)
+       (and (map? xml-doc)
+            (empty? xml-doc)) {}
+       (map? xml-doc)         (xml-map->edn xml-doc)
+       :else                  nil))))
