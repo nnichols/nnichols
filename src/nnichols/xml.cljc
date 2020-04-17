@@ -15,7 +15,22 @@
   (let [edn-str (cs/upper-case (name edn-keyword))]
     (keyword (cs/replace edn-str "-" "_"))))
 
-(declare xml->edn)
+(def ^:const attrs-length
+  (count "-attrs"))
+
+(defn attrs-tag->tag
+  [attrs-tag]
+  (let [tag-length (count attrs-tag)]
+    (subs attrs-tag 0 (- tag-length attrs-length))))
+
+(defn tag->attrs-tag
+  [tag]
+  (keyword (str (name tag) "-attrs")))
+
+(defn edn-attrs-tag?
+  [tag all-tags]
+  (boolean (and (cs/ends-with? tag "-attrs")
+                (contains? all-tags (attrs-tag->tag tag)))))
 
 (defn unique-tags?
   "Take an XML sequence as formatted by `clojure.xml/parse`, and determine if it exclusively contains unique tags"
@@ -23,6 +38,8 @@
   (let [unique-tag-count (count (distinct (keep :tag xml-seq)))
         tag-count        (count (map :tag xml-seq))]
     (= unique-tag-count tag-count)))
+
+(declare xml->edn)
 
 (defn xml-seq->edn
   "Transform an XML sequence as formatted by `clojure.xml/parse`, and transform it into normalized EDN.
@@ -72,10 +89,42 @@
 
   ([xml-doc opts]
    (cond
-     (nil? xml-doc)         nil
-     (string? xml-doc)      xml-doc
+     (or (nil? xml-doc)
+         (string? xml-doc)) xml-doc
      (sequential? xml-doc)  (xml-seq->edn xml-doc opts)
      (and (map? xml-doc)
           (empty? xml-doc)) {}
      (map? xml-doc)         (xml-map->edn xml-doc opts)
      :else                  nil)))
+
+(declare edn->xml)
+
+(defn edn-seq->xml
+  [edn]
+  (mapv edn->xml edn))
+
+(defn edn-map->xml
+  [edn]
+  (let [
+        edn-keys (keys edn)
+        key-set (set (map name edn-keys))
+        {attrs true tags false} (group-by #(edn-attrs-tag? (name %) key-set) edn-keys)
+        attrs-set (set (map #(attrs-tag->tag (name %)) attrs))
+        tag-generator (fn [t] (merge {:tag t
+                                      :content (edn->xml (get edn t))}
+                                     (when (contains? attrs-set (name t))
+                                       {:attrs (get edn (tag->attrs-tag t))})))]
+    (if (= 1 (count tags))
+      (tag-generator (first tags))
+      (mapv tag-generator tags))))
+
+(defn edn->xml
+  [edn]
+  (cond
+     (or (nil? edn)
+         (string? edn)) [edn]
+     (sequential? edn)  (edn-seq->xml edn)
+     (and (map? edn)
+          (empty? edn)) {}
+     (map? edn)         (edn-map->xml edn)
+     :else              nil))
