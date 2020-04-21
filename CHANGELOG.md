@@ -1,3 +1,9 @@
+## v0.9.0 / 2020 Apr 21
+
+> This release adds an EDN->XML transformer for use with clojure.data.xml
+
+* **Add** ^^^
+
 ## v0.8.1 / 2020 Apr 12
 
 > This release fixes a bug in XML conversion for nested singleton collections

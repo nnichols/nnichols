@@ -17,9 +17,22 @@
     (is (true? (nx/unique-tags? [{:tag "One"}])))
     (is (false? (nx/unique-tags? [{:tag "One"} {:tag "One"}])))))
 
+(deftest attrs-tag->tag-test
+  (testing "Functional correctness"
+    (is (= "HTML" (nx/attrs-tag->tag "HTML_ATTRS")))
+    (is (= "edn" (nx/attrs-tag->tag "edn-attrs")))))
+
+(deftest tag->attrs-tag-test
+  (testing "Functional correctness"
+    (is (= :HTML-attrs (nx/tag->attrs-tag "HTML" false)))
+    (is (= :HTML-attrs (nx/tag->attrs-tag :HTML false)))
+    (is (= :HTML_ATTRS (nx/tag->attrs-tag "HTML" true)))
+    (is (= :HTML_ATTRS (nx/tag->attrs-tag :HTML true)))
+    (is (= :edn-attrs (nx/tag->attrs-tag "edn" false)))))
+
 (def xml-example
   {:tag :TEST_DOCUMENT
-   :attrs {:xmlns "https://www.fake.not/real"}
+   :attrs {:XMLNS "https://www.fake.not/real"}
    :content
    [{:tag :HEAD
      :attrs nil
@@ -43,7 +56,7 @@
          :attrs {:BITS "00111010" :NUMBER "58"}
          :content ["more data"]}
         {:tag :SEGMENT
-         :attrs {:bytes "10100010" :number "-94"}
+         :attrs {:BYTES "10100010" :NUMBER "-94"}
          :content ["more fake data"]}]}]}]})
 
 (def edn-example
@@ -80,11 +93,11 @@
            {:META_DATA "Example Content" :META_DATA_ATTRS {:TYPE "tag"}}]
     :FILE {:GROUPS [{:GROUP "test-data-club"}]
            :SEGMENTS [{:SEGMENT "more data" :SEGMENT_ATTRS {:BITS "00111010" :NUMBER "58"}}
-                      {:SEGMENT "more fake data" :SEGMENT_ATTRS {:bytes "10100010" :number "-94"}}]}
+                      {:SEGMENT "more fake data" :SEGMENT_ATTRS {:BYTES "10100010" :NUMBER "-94"}}]}
     :FILE_ATTRS {:POSTER "JANE DOE <j.doe@fake-email.not-real>"
                  :DATE "2020/04/12"
                  :SUBJECT "TEST DATA"}}
-   :TEST_DOCUMENT_ATTRS {:xmlns "https://www.fake.not/real"}})
+   :TEST_DOCUMENT_ATTRS {:XMLNS "https://www.fake.not/real"}})
 
 (deftest xml->edn-test
   (testing "Functional correctness"
@@ -96,3 +109,15 @@
     (is (nil? (nx/xml->edn :edn)))
     (is (= (nx/xml->edn {}) {}))
     (is (= (nx/xml->edn "XML") "XML"))))
+
+(deftest edn->xml-test
+  (testing "Functional correctness"
+    (is (= xml-example (nx/edn->xml (nx/xml->edn xml-example {:preserve-attrs? true}) {:to-xml-case? true :stringify-values? true})))
+    (is (= (nx/edn->xml edn-example-with-attrs-and-original-keys {:to-xml-case? true :from-xml-case? true :stringify-values? true}) xml-example))
+    (is (= (nx/edn->xml edn-example-with-attrs {:to-xml-case? true :stringify-values? true}) xml-example))
+    (is (= (nx/edn->xml nil) [nil]))
+    (is (nil? (nx/edn->xml :edn)))
+    (is (= (nx/edn->xml {}) {}))
+    (is (= (nx/edn->xml "XML") ["XML"]))
+    (is (= (nx/edn->xml 100 {:stringify-values? true}) "100"))
+    (is (nil? (nx/edn->xml 100)))))
