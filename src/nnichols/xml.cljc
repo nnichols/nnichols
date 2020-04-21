@@ -19,17 +19,21 @@
   (count "-attrs"))
 
 (defn attrs-tag->tag
+  "Remove a suffix of `-attrs/_ATTRS` from `attrs-tag`"
   [attrs-tag]
   (let [tag-length (count attrs-tag)]
     (subs attrs-tag 0 (- tag-length attrs-length))))
 
 (defn tag->attrs-tag
-  [tag]
-  (keyword (str (name tag) "-attrs")))
+  "Transform `tag` to look like an attributes map tag by appending it with `-attrs/_ATTRS` pedending on the value of `upper-case?`"
+  [tag upper-case?]
+  (let [suffix (if upper-case? "_ATTRS" "-attrs")]
+    (keyword (str (name tag) suffix))))
 
 (defn edn-attrs-tag?
+  "Returns true iff the list of `all-tags` to see if it contains the normalized `tag`"
   [tag all-tags]
-  (boolean (and (cs/ends-with? (cs/lower-case tag) "-attrs")
+  (boolean (and (cs/ends-with? (cs/lower-case tag) "attrs")
                 (contains? all-tags (attrs-tag->tag tag)))))
 
 (defn unique-tags?
@@ -103,6 +107,11 @@
 (declare edn->xml)
 
 (defn edn-seq->xml
+  "Transform an EDN sequence to the pseudo XML expected by `clojure.data.xml`.
+   To change the default behavior, an option map may be provided with the following keys:
+   to-xml-case? - To modify the keys representing XML tags to XML_CASE
+   from-xml-case? - If the source EDN has XML_CASE keys
+   stringify-values? - to coerce non-nil, non-string, non-collection values to strings"
   ([edn]
    (edn-seq->xml edn {}))
 
@@ -110,10 +119,15 @@
    (mapv #(edn->xml % opts) edn)))
 
 (defn edn-map->xml
+  "Transform an EDN map to the pseudo XML expected by `clojure.data.xml`.
+   To change the default behavior, an option map may be provided with the following keys:
+   to-xml-case? - To modify the keys representing XML tags to XML_CASE
+   from-xml-case? - If the source EDN has XML_CASE keys
+   stringify-values? - to coerce non-nil, non-string, non-collection values to strings"
   ([edn]
    (edn-map->xml edn {}))
 
-  ([edn {:keys [to-xml-case? stringify-values?] :as opts}]
+  ([edn {:keys [to-xml-case? from-xml-case? stringify-values?] :as opts}]
    (let [edn-keys (keys edn)
          key-set (set (map name edn-keys))
          {attrs true tags false} (group-by #(edn-attrs-tag? (name %) key-set) edn-keys)
@@ -124,7 +138,7 @@
                          (let [xml-tag     (kw-function t)
                                xml-content (edn->xml (get edn t) opts)
                                xml-attrs   (when (contains? attrs-set (name t))
-                                             (-> (get edn (tag->attrs-tag t))
+                                             (-> (get edn (tag->attrs-tag t from-xml-case?))
                                                  (nu/update-keys kw-function)
                                                  (nu/update-vals val-function)))]
                            {:tag     xml-tag
@@ -135,6 +149,11 @@
        (mapv tag-generator tags)))))
 
 (defn edn->xml
+  "Transform an EDN data structure to the pseudo XML expected by `clojure.data.xml`.
+   To change the default behavior, an option map may be provided with the following keys:
+   to-xml-case? - To modify the keys representing XML tags to XML_CASE
+   from-xml-case? - If the source EDN has XML_CASE keys
+   stringify-values? - to coerce non-nil, non-string, non-collection values to strings"
   ([edn]
    (edn->xml edn {}))
 
