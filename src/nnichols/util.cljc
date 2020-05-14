@@ -49,25 +49,25 @@
 (defn filter-by-values
   "Return `m` with only the key:value pairs whose values cause `f` to evaluate truthily"
   [f m]
-  (let [reducing-fn (fn [m-prime k v] (if (f v) (assoc m-prime k v) m-prime))]
+  (let [reducing-fn (fn [m' k v] (if (f v) (assoc m' k v) m'))]
     (reduce-kv reducing-fn {} m)))
 
 (defn filter-by-keys
   "Return `m` with only the key:value pairs whose keys cause `f` to evaluate truthily"
   [f m]
-  (let [reducing-fn (fn [m-prime k v] (if (f k) (assoc m-prime k v) m-prime))]
+  (let [reducing-fn (fn [m' k v] (if (f k) (assoc m' k v) m'))]
     (reduce-kv reducing-fn {} m)))
 
 (defn remove-by-values
   "Return `m` with only the key:value pairs whose values cause `f` to evaluate falsily"
   [f m]
-  (let [reducing-fn (fn [m-prime k v] (if (f v) m-prime (assoc m-prime k v)))]
+  (let [reducing-fn (fn [m' k v] (if (f v) m' (assoc m' k v)))]
     (reduce-kv reducing-fn {} m)))
 
 (defn remove-by-keys
   "Return `m` with only the key:value pairs whose keys cause `f` to evaluate falsily"
   [f m]
-  (let [reducing-fn (fn [m-prime k v] (if (f k) m-prime (assoc m-prime k v)))]
+  (let [reducing-fn (fn [m' k v] (if (f k) m' (assoc m' k v)))]
     (reduce-kv reducing-fn {} m)))
 
 (defn update-vals
