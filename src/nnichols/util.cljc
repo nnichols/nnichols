@@ -8,7 +8,7 @@
 ;; RUNTIME SAFETY
 ;;
 (defn try-or-nil
-  "Try applying f to args, returning nil in case of an Exception."
+  "Try applying f to args, returning nil in case of an exception."
   [f & args]
   (try
     (apply f args)
@@ -33,9 +33,11 @@
 ;; COLLECTION FUNCTIONS
 ;;
 (defn only
+  "Attempt to return the first and only element in `coll`.
+   If the collection does not contain exactly one element, throw an exception"
   [coll]
   (if (seq (rest coll))
-    (throw (ex-info "Collection contains more than one element!"))
+    (throw (ex-info "Collection does not contain exactly one element!" {}))
     (first coll)))
 
 ;;
@@ -129,9 +131,13 @@
   (partial cskx/transform-keys csk/->snake_case_keyword))
 
 (def only-key
+  "Attempt to return the first and only key in a map.
+   If the map does not contain exactly one key:value pair, throw an exception"
   (comp only keys))
 
 (def only-val
+  "Attempt to return the first and only value in a map.
+   If the map does not contain exactly one key:value pair, throw an exception"
   (comp only vals))
 
 ;;
