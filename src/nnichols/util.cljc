@@ -16,6 +16,29 @@
       nil)))
 
 ;;
+;; FUNCTIONAL CONVENIENCE
+;;
+(defn rcomp
+  "Right-compose a list of functions: like comp, but in the opposite direction."
+  [& fns]
+  (apply comp (reverse fns)))
+
+(defn rpartial
+  "Right-partial a list of functions: like partial, but in the opposite direction."
+  [f & args]
+  (fn [& inner-args]
+    (apply f (concat inner-args args))))
+
+;;
+;; COLLECTION FUNCTIONS
+;;
+(defn only
+  [coll]
+  (if (seq (rest coll))
+    (throw (ex-info "Collection contains more than one element!"))
+    (first coll)))
+
+;;
 ;; MAP FUNCTIONS
 ;;
 (def sort-keys
@@ -104,6 +127,12 @@
 (def ->snake-keys
   "Takes a map and returns the map with snake_cased keys."
   (partial cskx/transform-keys csk/->snake_case_keyword))
+
+(def only-key
+  (comp only keys))
+
+(def only-val
+  (comp only vals))
 
 ;;
 ;; UUID
