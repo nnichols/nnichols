@@ -8,12 +8,37 @@
 ;; RUNTIME SAFETY
 ;;
 (defn try-or-nil
-  "Try applying f to args, returning nil in case of an Exception."
+  "Try applying f to args, returning nil in case of an exception."
   [f & args]
   (try
     (apply f args)
     (catch #? (:clj Exception :cljs :default) _
       nil)))
+
+;;
+;; FUNCTIONAL CONVENIENCE
+;;
+(defn rcomp
+  "Right-compose a list of functions: like comp, but in the opposite direction."
+  [& fns]
+  (apply comp (reverse fns)))
+
+(defn rpartial
+  "Right-partial a list of functions: like partial, but in the opposite direction."
+  [f & args]
+  (fn [& inner-args]
+    (apply f (concat inner-args args))))
+
+;;
+;; COLLECTION FUNCTIONS
+;;
+(defn only
+  "Attempt to return the first and only element in `coll`.
+   If the collection does not contain exactly one element, throw an exception"
+  [coll]
+  (if (seq (rest coll))
+    (throw (ex-info "Collection does not contain exactly one element!" {}))
+    (first coll)))
 
 ;;
 ;; MAP FUNCTIONS
@@ -104,6 +129,16 @@
 (def ->snake-keys
   "Takes a map and returns the map with snake_cased keys."
   (partial cskx/transform-keys csk/->snake_case_keyword))
+
+(def only-key
+  "Attempt to return the first and only key in a map.
+   If the map does not contain exactly one key:value pair, throw an exception"
+  (comp only keys))
+
+(def only-val
+  "Attempt to return the first and only value in a map.
+   If the map does not contain exactly one key:value pair, throw an exception"
+  (comp only vals))
 
 ;;
 ;; UUID

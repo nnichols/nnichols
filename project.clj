@@ -1,4 +1,4 @@
-(defproject nnichols "0.9.0"
+(defproject nnichols "0.10.0"
             :description "A bunch of functions and definitions I'm sick of copy/pasting"
             :url "https://github.com/nnichols/nnichols"
             :license {:name "MIT"
@@ -8,7 +8,7 @@
                            [com.andrewmcveigh/cljs-time "0.5.2"]
                            [org.clojure/clojure "1.10.1"]
                            [org.clojure/test.check "1.0.0"]
-                           [org.clojure/clojurescript "1.10.597" :scope "provided"]]
+                           [org.clojure/clojurescript "1.10.773" :scope "provided"]]
 
             :plugins [[lein-cljsbuild "1.1.7"]]
 

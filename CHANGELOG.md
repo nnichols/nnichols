@@ -1,3 +1,9 @@
+## v0.10.0 / 2020 Jul 18
+
+> This release adds several `only` functions for singleton collections
+
+* **Add** ^^^
+
 ## v0.9.0 / 2020 Apr 21
 
 > This release adds an EDN->XML transformer for use with clojure.data.xml
