@@ -1,3 +1,11 @@
+## v1.0.0 / 2020 Jul 28
+
+> This release ...
+
+* **Add** -
+* **Fix** -
+* **Update** -
+
 ## v0.10.0 / 2020 Jul 18
 
 > This release adds several `only` functions for singleton collections
