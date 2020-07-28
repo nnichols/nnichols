@@ -3,7 +3,7 @@
             [nnichols.util :as nu]
             [nnichols.predicate :as npr]
             #? (:clj  [clojure.test :refer [deftest is testing]])
-            #? (:cljs [cljs.test    :refer-macros [deftest is testing run-tests]])))
+            #? (:cljs [cljs.test    :refer-macros [deftest is testing]])))
 
 (deftest parse-radix-test
   (testing "Strings are turned into the positive integer they represent"

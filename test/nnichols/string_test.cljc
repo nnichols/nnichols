@@ -1,7 +1,7 @@
 (ns nnichols.string-test
   (:require [nnichols.string :as nstr]
             #? (:clj  [clojure.test :refer [deftest is testing]])
-            #? (:cljs [cljs.test    :refer-macros [deftest is testing run-tests]])))
+            #? (:cljs [cljs.test    :refer-macros [deftest is testing]])))
 
 (deftest prepare-for-compare-test
   (testing "Strings are appropriately re-cased and trimmed of whitespace"

@@ -1,7 +1,7 @@
 (ns nnichols.xml-test
   (:require [nnichols.xml :as nx]
             #? (:clj  [clojure.test :refer [deftest is testing]])
-            #? (:cljs [cljs.test    :refer-macros [deftest is testing run-tests]])))
+            #? (:cljs [cljs.test    :refer-macros [deftest is testing]])))
 
 (deftest tag-keyword-conversion-test
   (testing "Tag formatted and EDN formatted keywords can be transformed"
