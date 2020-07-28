@@ -36,7 +36,8 @@
   "Attempt to return the first and only element in `coll`.
    If the collection does not contain exactly one element, throw an exception"
   [coll]
-  (if (seq (rest coll))
+  (if (or (empty? coll)
+          (seq (rest coll)))
     (throw (ex-info "Collection does not contain exactly one element!" {}))
     (first coll)))
 

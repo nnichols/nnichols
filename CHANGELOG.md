@@ -1,3 +1,9 @@
+## v1.0.0 / 2020 Jul 28
+
+> This release removes the palette namespace, as it has been more appropriately migrated to com.wallbrew/brewtility
+
+* **Update** ^^^
+
 ## v0.10.0 / 2020 Jul 18
 
 > This release adds several `only` functions for singleton collections

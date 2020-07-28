@@ -1,7 +1,7 @@
 (ns nnichols.util-test
   (:require [nnichols.util :as nu]
             #? (:clj  [clojure.test :refer [deftest is testing]])
-            #? (:cljs [cljs.test    :refer-macros [deftest is testing run-tests]])))
+            #? (:cljs [cljs.test    :refer-macros [deftest is testing]])))
 
 (deftest sort-keys-test
   (testing "Keywords are sorted lexicographically"
@@ -168,3 +168,9 @@
     (is (= "snakes" (nu/pluralize "snake" 2)))
     (is (= "peach" (nu/pluralize "peach" 1 "peaches")))
     (is (= "peaches" (nu/pluralize "peach" 10 "peaches")))))
+
+(deftest only-test
+  (testing "Functional correctness"
+    (is (= 1 (nu/only [1])))
+    #?(:clj (is (thrown? Exception (nu/only []))))
+    #?(:clj (is (thrown? Exception (nu/only [1 2]))))))

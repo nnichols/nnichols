@@ -1,7 +1,7 @@
 (ns nnichols.http-test
   (:require [nnichols.http :as http]
             #? (:clj  [clojure.test :refer [deftest is testing]])
-            #? (:cljs [cljs.test    :refer-macros [deftest is testing run-tests]])))
+            #? (:cljs [cljs.test    :refer-macros [deftest is testing]])))
 
 (deftest bodiless-json-response
   (testing "Response maps are properly created"
