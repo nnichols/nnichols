@@ -1,10 +1,8 @@
 ## v1.0.0 / 2020 Jul 28
 
-> This release ...
+> This release removes the palette namespace, as it has been more appropriately migrated to com.wallbrew/brewtility
 
-* **Add** -
-* **Fix** -
-* **Update** -
+* **Update** ^^^
 
 ## v0.10.0 / 2020 Jul 18
 
