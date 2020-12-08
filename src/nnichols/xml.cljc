@@ -1,6 +1,7 @@
 (ns nnichols.xml
   "A bunch of utility functions for xml documents"
   (:require [clojure.string :as cs]
+            [clojure.data.xml :as xml]
             [nnichols.util :as nu]))
 
 (defn xml-tag->keyword
@@ -167,3 +168,38 @@
      (map? edn)             (edn-map->xml edn opts)
      (and stringify-values?
           (some? edn))      (str edn))))
+
+(defn deformat
+  "Remove line termination formatting specific to Windows (since we're ingesting XML) and double spacing"
+  [s]
+  (cs/replace (cs/replace s #"\r\n" "") #"\s\s+" ""))
+
+(defn xml-str->edn
+   "Parse an XML document with `clojure.xml/parse` and transform it into normalized EDN.
+   By default, this also mutates keys from XML_CASE to lisp-case and ignores XML attributes within tags.
+   To change this behavior, an option map may be provided with the following keys:
+   preserve-keys? - to maintain the exact keyword structure provided by `clojure.xml/parse`
+   preserve-attrs? - to maintain embedded XML attributes
+   stringify-values? - to coerce non-nil, non-string, non-collection values to strings"
+  ([xml-str]
+   (xml-str->edn xml-str {}))
+
+  ([xml-str opts]
+   (-> xml-str
+       deformat
+       xml/parse-str
+       (xml->edn opts))))
+
+(defn edn->xml-str
+  "Transform an EDN data structure to into an XML string via `clojure.data.xml`.
+   To change the default behavior, an option map may be provided with the following keys:
+     to-xml-case? - To modify the keys representing XML tags to XML_CASE
+     from-xml-case? - If the source EDN has XML_CASE keys
+     stringify-values? - to coerce non-nil, non-string, non-collection values to strings"
+  ([edn]
+   (edn->xml-str edn {}))
+  
+  ([edn opts]
+   (-> edn
+       (edn->xml opts)
+       xml/emit-str)))
