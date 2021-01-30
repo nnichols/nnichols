@@ -3,11 +3,11 @@
             :url "https://github.com/nnichols/nnichols"
             :license {:name "MIT"
                       :url "https://opensource.org/licenses/MIT"}
-            :dependencies [[camel-snake-kebab "0.4.1"]
+            :dependencies [[camel-snake-kebab "0.4.2"]
                            [clj-time "0.15.2"]
                            [com.andrewmcveigh/cljs-time "0.5.2"]
-                           [org.clojure/clojure "1.10.1"]
-                           [org.clojure/test.check "1.0.0"]
+                           [org.clojure/clojure "1.10.2"]
+                           [org.clojure/test.check "1.1.0"]
                            [org.clojure/clojurescript "1.10.773" :scope "provided"]]
 
             :plugins [[lein-cljsbuild "1.1.7"]]
