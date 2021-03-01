@@ -10,11 +10,11 @@
                            [org.clojure/test.check "1.1.0"]
                            [org.clojure/clojurescript "1.10.773" :scope "provided"]]
 
-            :plugins [[lein-cljsbuild "1.1.7"]]
+            :plugins [[lein-cljsbuild "1.1.8"]]
 
             :profiles {:uberjar {:aot :all}
                        :dev {:dependencies [[doo "0.1.11"]]
-                             :plugins      [[lein-doo "0.1.10"]]}}
+                             :plugins      [[lein-doo "0.1.11"]]}}
 
             :aliases {"test-build" ["do" "clean" ["cljsbuild" "once" "test"] ["doo" "once"] ["test"]]}
 
