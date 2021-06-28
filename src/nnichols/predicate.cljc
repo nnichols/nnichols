@@ -12,6 +12,7 @@
      :cljs (or (true? x)
                (false? x))))
 
+#_:clj-kondo/ignore
 (defn uuid?
   "Returns true iff `x` is a UUID."
   [x]
