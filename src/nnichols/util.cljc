@@ -36,10 +36,12 @@
   "Attempt to return the first and only element in `coll`.
    If the collection does not contain exactly one element, throw an exception"
   [coll]
-  (if (or (empty? coll)
-          (seq (rest coll)))
-    (throw (ex-info "Collection does not contain exactly one element!" {}))
-    (first coll)))
+  (let [singleton-collection? (if (counted? coll)
+                                (= (count coll) 1)
+                                (not (next coll)))]
+    (if singleton-collection?
+      (first coll)
+      (throw (ex-info "Collection does not contain exactly one element!" {})))))
 
 ;;
 ;; MAP FUNCTIONS
