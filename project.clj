@@ -7,7 +7,7 @@
                            [clj-time "0.15.2"]
                            [com.andrewmcveigh/cljs-time "0.5.2"]
                            [org.clojure/clojure "1.10.3"]
-                           [org.clojure/test.check "1.1.0"]
+                           [org.clojure/test.check "1.1.1"]
                            [org.clojure/clojurescript "1.10.893" :scope "provided"]]
 
             :plugins [[lein-cljsbuild "1.1.8"]]
