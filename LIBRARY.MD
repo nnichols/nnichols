@@ -28,6 +28,6 @@ Once the project has been added, you can require in any namespace and use them f
 
 ## License
 
-Copyright © 2020-2021 [Nick A Nichols](https://nnichols.github.io/)
+Copyright © 2020-2022 [Nick A Nichols](https://nnichols.github.io/)
 
 MIT License provided in full text within LICENSE file.
