@@ -6,7 +6,7 @@
             :dependencies [[camel-snake-kebab "0.4.2"]
                            [clj-time "0.15.2"]
                            [com.andrewmcveigh/cljs-time "0.5.2"]
-                           [org.clojure/clojure "1.10.3"]
+                           [org.clojure/clojure "1.11.0"]
                            [org.clojure/test.check "1.1.1"]
                            [org.clojure/clojurescript "1.11.4" :scope "provided"]]
 
