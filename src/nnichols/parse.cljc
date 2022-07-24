@@ -1,9 +1,10 @@
 (ns nnichols.parse
   "A bunch of utility functions for parsing strings to the types they represent"
-    (:require [clojure.string :as cs]
-              #?(:cljs [goog.string])
-              [nnichols.predicate :as np]
-              [nnichols.util :as nu])
+  (:refer-clojure :exclude [parse-uuid parse-double parse-boolean])
+  (:require [clojure.string :as cs]
+            #?(:cljs [goog.string])
+            [nnichols.predicate :as np]
+            [nnichols.util :as nu])
   #?(:clj (:import (java.util UUID)
                    (java.lang Double))))
 
