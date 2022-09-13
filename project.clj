@@ -3,7 +3,7 @@
             :url "https://github.com/nnichols/nnichols"
             :license {:name "MIT"
                       :url "https://opensource.org/licenses/MIT"}
-            :dependencies [[camel-snake-kebab "0.4.2"]
+            :dependencies [[camel-snake-kebab "0.4.3"]
                            [clj-time "0.15.2"]
                            [com.andrewmcveigh/cljs-time "0.5.2"]
                            [org.clojure/clojure "1.11.1"]
