@@ -1,8 +1,8 @@
 (ns nnichols.util
   "A bunch of utility functions"
+  (:refer-clojure :exclude [uuid update-keys update-vals])
   (:require [camel-snake-kebab.core :as csk]
-            [camel-snake-kebab.extras :as cskx])
-  (:refer-clojure :exclude [uuid]))
+            [camel-snake-kebab.extras :as cskx]))
 
 ;;
 ;; RUNTIME SAFETY

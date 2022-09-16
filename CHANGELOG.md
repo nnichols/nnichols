@@ -1,3 +1,9 @@
+## v1.1.0 / 2022 Jul 24
+
+> This release surpresses warninhs of replaced values in more recent versions of clojure
+
+* **Update** ^^^
+
 ## v1.0.0 / 2020 Jul 28
 
 > This release removes the palette namespace, as it has been more appropriately migrated to com.wallbrew/brewtility

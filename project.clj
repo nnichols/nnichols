@@ -1,9 +1,9 @@
-(defproject nnichols "1.0.0"
+(defproject nnichols "1.1.0"
             :description "A bunch of functions and definitions I'm sick of copy/pasting"
             :url "https://github.com/nnichols/nnichols"
             :license {:name "MIT"
                       :url "https://opensource.org/licenses/MIT"}
-            :dependencies [[camel-snake-kebab "0.4.2"]
+            :dependencies [[camel-snake-kebab "0.4.3"]
                            [clj-time "0.15.2"]
                            [com.andrewmcveigh/cljs-time "0.5.2"]
                            [org.clojure/clojure "1.11.1"]
