@@ -9,7 +9,13 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v4.1.7
+      id: checkout
+      uses: actions/checkout@v4.2.0
+
+    - name: Report Checkout
+      run: |
+          echo "Commit: ${{ steps.checkout.outputs.commit }}"
+          echo "Ref: ${{ steps.checkout.outputs.ref }}"
 
     - name: Cache maven dependencies
       uses: actions/cache@v4
