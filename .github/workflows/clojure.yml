@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Checkout Repository
       id: checkout
-      uses: actions/checkout@v4.2.2
+      uses: actions/checkout@v5.0.0
 
     - name: Report Checkout
       run: |
