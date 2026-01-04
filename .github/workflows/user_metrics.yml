@@ -1,4 +1,4 @@
-name: Metrics
+name: Post Metrics Image
 on:
   schedule: [{cron: "42 14 * * 6"}]
   workflow_dispatch:
@@ -7,18 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # See action.yml for all options
-      - uses: lowlighter/metrics@latest
+      - uses: lowlighter/metrics@65836723097537a54cd8eb90f61839426b4266b6
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           template: classic
           repositories_affiliations: owner, collaborator
-          # Include stats on gists
-          plugin_gists: yes
-          # Include GH Habits
-          plugin_habits: yes
-          plugin_habits_from: 200
-          plugin_habits_days: 30
-          plugin_habits_facts: yes
-          plugin_habits_charts: yes
-          plugin_habits_trim: yes
           config_timezone: America/Chicago
