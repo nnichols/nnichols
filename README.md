@@ -4,7 +4,7 @@
 
 👩‍💻 I'm currently working on: [brewtility](https://github.com/Wall-Brew-Co/brewtility), [common-beer-format](https://github.com/Wall-Brew-Co/common-beer-format), [lein-sealog](https://github.com/Wall-Brew-Co/lein-sealog)
 
-🧠 I'm currently learning: Japanese Language, ChatOps
+🧠 I'm currently learning: Japanese Language, Kotlin, TypeScript
 
 💬 Ask me about: Clojure, Clojurescript, GitHub Actions
 
