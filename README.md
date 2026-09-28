@@ -6,7 +6,7 @@
 
 🧠 I'm currently learning: Japanese Language, Kotlin, TypeScript
 
-💬 Ask me about: Clojure, Clojurescript, GitHub Actions
+💬 Ask me about: Clojure, Bazel, GitHub Actions
 
 😄 Pronouns: he/him/his
 
